@@ -23,3 +23,19 @@ function createFile($name){
         fclose($handle);
     }
 }
+
+function taille_dossier($rep){
+    $racine = opendir($rep);
+    $taille = 0;
+    while($dossier = readdir($racine)){
+        if (!in_array($dossier, array("..", "."))){
+            if(is_dir($rep.DIRECTORY_SEPARATOR.$dossier)){
+                $taille+=taille_dossier($rep. DIRECTORY_SEPARATOR .$dossier);
+            }else{
+                $taille+= filesize($rep. DIRECTORY_SEPARATOR .$dossier);
+            }
+        }  
+    }
+    closedir($racine);
+    return $taille;
+}
