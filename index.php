@@ -1,3 +1,7 @@
+<?php
+require_once "function.php";
+date_default_timezone_set('Europe/Paris');
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -21,6 +25,12 @@
           <div class="navbar-menu">
             <div class="navbar-end">
               <div class="navbar-item">
+                <form action="" method="post">
+                  <label for="name">Nom :</label>
+                  <input type="text" name="name" id="name">
+                  <input type="submit" value="createDir">
+                  <input type="submit" value="createFile">
+                </form>
                 <button class="button">Créer un dossier</button>
                 <button class="button">Créer un fichier</button>
               </div>
@@ -36,24 +46,36 @@
         <thead>
           <tr>
             <th>Nom</th>
-            <th>Taille</th>
+            <th>Taille (octets)</th>
             <th>Type</th>
-            <th>Date de création</th>
+            <th>Date de création (UTC +2)</th>
             <th>Actions</th>
           </tr>
         </thead>"
         ?>
         <tbody>
-          <tr>
-            <th>$filename</th>
-            <th>$filesize</th>
-            <th>$filetype</th>
-            <th>$filecreation</th>
-            <th>
-              <button>Modifier</button>
-              <button>Supprimer</button>
-            </th>
-          </tr>
+
+      <?php
+        $items = scandir(getcwd());
+        foreach($items as $item) {
+          if($item !== "." && $item !== "..") {
+            $type = (is_dir($item))? "dossier":"fichier";
+            $taille = (is_dir($item)) ? taille_dossier($item):filesize($item);
+            echo"
+            <tr>
+              <th>$item</th>
+              <th>$taille</th>
+              <th>$type</th>
+              <th>".date ("d/m/Y H:i:s", filemtime($item))."</th>
+              <th>
+                <button>Modifier</button>
+                <button>Supprimer</button>
+              </th>
+            </tr>
+            ";
+          }
+        }
+      ?>
         </tbody>
       </table>
     </div>
