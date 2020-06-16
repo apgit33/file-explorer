@@ -1,5 +1,6 @@
 <?php
 require_once "function.php";
+require_once "init.php";
 date_default_timezone_set('Europe/Paris');
 ?>
 <!DOCTYPE html>
@@ -10,15 +11,44 @@ date_default_timezone_set('Europe/Paris');
     <title>File Explorer</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
   </head>
+ 
   <body>
+  <?php
+
+        if (!empty($_GET['dir'])) {
+        $cwd = $_GET['dir'];
+        }
+        else  {
+          $cwd = $init_dir;
+        }
+
+        chdir($cwd);
+
+    ?>
       <header>
       <div class="container">
         <nav class="navbar">
           <div class="breadcrumb has-succeeds-separator" aria-label="breadcrumbs">
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Chemin</a></li>
-                    <li><a href="#">Chemin</a></li>
+                <?php
+                   // break absolute path into individual items
+                   $breadcrumb_menu = explode(DIRECTORY_SEPARATOR, getcwd());
+                   $path_accum = ''; // initialize increment
+                   $is_home = false;
+                   // iterate over root directory
+                  foreach ($breadcrumb_menu as $item) {
+                    $path_accum .= $item . DIRECTORY_SEPARATOR; // recursive path increment
+                    if ($item === $home_dir) {
+                        $is_home = true;
+                    }
+                    if ($is_home) {
+                        echo "<li class=\"is-active\"><a href=\"?dir=$path_accum\" title=\"$path_accum\">$item</a></li>";
+                    }
+                  }
+                  
+
+                   ?>
+                   
                     <li class="is-active"><a href="#" aria-current="page">Fil d'Ariane</a></li>
                 </ul>
           </div>
@@ -51,7 +81,7 @@ date_default_timezone_set('Europe/Paris');
             <th>Date de création (UTC +2)</th>
             <th>Actions</th>
           </tr>
-        </thead>"
+        </thead>";
         ?>
         <tbody>
 
