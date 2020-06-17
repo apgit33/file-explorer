@@ -58,15 +58,13 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
               <form action="" method="post" id="create_dir">
                   <label for="name">Nom :</label>
                   <input type="text" name="name" id="name">
-                  <input type="submit" name="createDir" value="createDir">
-                  <input type="submit" name="createFile" value="createFile">
+                  <input type="submit" name="create" value="create">
                 </form>   
               </div>     
                 <ul id='erreur_creation'>
                 <li>
                 <?php 
-                (isset($_POST['createDir']))? createDir($name):"";
-                (isset($_POST['createFile']))? createFile($name):"";
+                (isset($_POST['create']))? create($name):"";
                 ?>
               </li></ul>
             </div>

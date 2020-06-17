@@ -1,5 +1,21 @@
 <?php
-
+function create($name) {
+    if (!file_exists($name)) {
+        if (($name !=='') && (strpbrk($name, "\/?%*:|\"<>")=== FALSE)) {
+            $extension=strrchr($name,'.');
+            if ($extension == '.txt') {
+                $handle = fopen($name,'w'); 
+                fclose($handle);
+            } else {
+                mkdir($name);
+            }
+        } else {
+            echo "Mauvais nom de fichier/dossier";
+        }
+    } else {
+        echo "Nom déjà existant";
+    }
+}
 function createDir($name){
     $erreur ="";
 
