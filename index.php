@@ -152,6 +152,7 @@ date_default_timezone_set('Europe/Paris');
       </div>
     </footer>
   </div>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://unpkg.com/vue"></script>
   <script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
   <script>
