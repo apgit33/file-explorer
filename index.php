@@ -98,7 +98,13 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
             $taille = (is_dir($item)) ? taille_dossier($item):filesize($item);
             echo"
             <tr>
-              <th>$item</th>
+              <th>";
+              if ((is_dir($item))) {
+                echo "<a href=\"?dir=$cwd$item".DIRECTORY_SEPARATOR."\" title='$cwd$item'>$item</a>";
+              } else {
+                echo $item;
+              }
+            echo"</th>
               <th>$taille</th>
               <th>$type</th>
               <th>".date ("d/m/Y H:i:s", filemtime($item))."</th>
