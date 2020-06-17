@@ -2,6 +2,7 @@
 require_once "function.php";
 require_once "init.php";
 date_default_timezone_set('Europe/Paris');
+$name = (isset($_POST['name']) ? $_POST['name']:"");
 ?>
 <!DOCTYPE html>
 <html>
@@ -58,15 +59,20 @@ date_default_timezone_set('Europe/Paris');
           <div class="navbar-menu">
             <div class="navbar-end">
               <div class="navbar-item">
-                <form action="" method="post">
+              <form action="" method="post" id="create_dir">
                   <label for="name">Nom :</label>
                   <input type="text" name="name" id="name">
-                  <input type="submit" value="createDir">
-                  <input type="submit" value="createFile">
-                </form>
-                <button class="button">Créer un dossier</button>
-                <button class="button">Créer un fichier</button>
-              </div>
+                  <input type="submit" name="createDir" value="createDir">
+                  <input type="submit" name="createFile" value="createFile">
+                </form>   
+              </div>     
+                <ul id='erreur_creation'>
+                <li>
+                <?php 
+                (isset($_POST['createDir']))? createDir($name):"";
+                (isset($_POST['createFile']))? createFile($name):"";
+                ?>
+              </li></ul>
             </div>
           </div>
         </nav>
@@ -172,5 +178,6 @@ date_default_timezone_set('Europe/Paris');
                 const app = new Vue(example)
                 app.$mount('#app')
   </script>
+    <!-- <script src="script.js"></script> -->
   </body>
 </html>
