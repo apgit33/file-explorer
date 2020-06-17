@@ -23,7 +23,7 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
         $cwd = $_GET['dir'];
         }
         else  {
-          $cwd = $init_dir;
+          $cwd = $init_dir.DIRECTORY_SEPARATOR;
         }
 
         chdir($cwd);
