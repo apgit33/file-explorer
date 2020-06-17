@@ -46,14 +46,10 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
                         $is_home = true;
                     }
                     if ($is_home) {
-                        echo "<li class=\"is-active\"><a href=\"?dir=$path_accum\" title=\"$path_accum\">$item</a></li>";
+                        echo "<li><a href=\"?dir=$path_accum\" title=\"$path_accum\">$item</a></li>";
                     }
                   }
-                  
-
                    ?>
-                   
-                    <li class="is-active"><a href="#" aria-current="page">Fil d'Ariane</a></li>
                 </ul>
           </div>
           <div class="navbar-menu">
@@ -158,6 +154,7 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
       </div>
     </footer>
   </div>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://unpkg.com/vue"></script>
   <script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
   <script>
