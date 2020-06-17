@@ -45,14 +45,10 @@ date_default_timezone_set('Europe/Paris');
                         $is_home = true;
                     }
                     if ($is_home) {
-                        echo "<li class=\"is-active\"><a href=\"?dir=$path_accum\" title=\"$path_accum\">$item</a></li>";
+                        echo "<li><a href=\"?dir=$path_accum\" title=\"$path_accum\">$item</a></li>";
                     }
                   }
-                  
-
                    ?>
-                   
-                    <li class="is-active"><a href="#" aria-current="page">Fil d'Ariane</a></li>
                 </ul>
           </div>
           <div class="navbar-menu">
