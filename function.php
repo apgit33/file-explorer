@@ -67,3 +67,10 @@ function taille_dossier($rep){
     closedir($racine);
     return $taille;
 }
+
+function afficher_content($name) {
+    $lines = file("./$name"); // display file line by line 
+    foreach($lines as $line_num => $line) { 
+        echo "# {$line_num} : ".htmlspecialchars($line)."<br />\n"; 
+    }
+}

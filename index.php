@@ -97,10 +97,10 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
             echo"
             <tr>
               <th>";
-              if ((is_dir($item))) {
-                echo "<a href=\"?dir=$cwd$item".DIRECTORY_SEPARATOR."\" title='$cwd$item'>$item</a>";
+              if (is_dir($item)) {
+                echo "<a href='?dir=$cwd$item".DIRECTORY_SEPARATOR."' title='$cwd$item'>$item</a>";
               } else {
-                echo $item;
+                echo "<a href='?dir=$cwd&file=$item' class='fichier' title='$cwd$item' target='blank' >$item</a>";
               }
             echo"</th>
               <th>$taille</th>
@@ -117,6 +117,24 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
       ?>
         </tbody>
       </table>
+      <div>
+        <?php         
+          if (!empty($_GET['file'])) {
+            $extension=strrchr($_GET['file'],'.');
+            switch ($extension) {
+              case '.txt':
+                afficher_content($_GET['file']);
+                break;
+              case '.jpg':
+                print_r ("<img src='".substr(strrchr(getcwd(),DIRECTORY_SEPARATOR),1).DIRECTORY_SEPARATOR.$_GET['file']."' alt=''/>");
+                break;
+              
+              default:
+                break;
+            }
+          }
+        ?>
+      </div>
     </div>
   </section>
   <div id="app" class="container">
