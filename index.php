@@ -9,10 +9,13 @@ date_default_timezone_set('Europe/Paris');
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>File Explorer</title>
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.3.45/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/buefy/dist/buefy.min.css">
   </head>
  
   <body>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
   <?php
 
         if (!empty($_GET['dir'])) {
@@ -110,6 +113,38 @@ date_default_timezone_set('Europe/Paris');
       </table>
     </div>
   </section>
+  <div id="app" class="container">
+  <section>
+    <b-field class="file">
+      <b-upload v-model="file" expanded>
+        <a class="button is-primary is-fullwidth">
+          <b-icon icon="upload"></b-icon>
+          <span>{{ file.name || "Click to upload"}}</span>
+        </a>
+      </b-upload>
+    </b-field>
+    <b-field>
+      <b-upload v-model="dropFiles" multiple drag-drop expanded>
+        <section class="section">
+          <div class="content has-text-centered">
+            <p>
+              <b-icon icon="upload" size="is-large"></b-icon>
+            </p>
+            <p>Drop your files here or click to upload</p>
+          </div>
+        </section>
+      </b-upload>
+    </b-field>
+
+    <div class="tags">
+      <span v-for="(file, index) in dropFiles" :key="index" class="tag is-primary">
+        {{file.name}}
+        <button class="delete is-small" type="button" @click="deleteDropFile(index)"></button>
+      </span>
+    </div>
+  </section>
+  </div>
+  
   <div class="container">
     <footer class="footer">
       <div class="content has-text-centered">
@@ -117,5 +152,25 @@ date_default_timezone_set('Europe/Paris');
       </div>
     </footer>
   </div>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
+  <script>
+    const example = {
+  data() {
+    return {
+      file: {},
+      dropFiles: []
+    };
+  },
+  methods: {
+    deleteDropFile(index) {
+      this.dropFiles.splice(index, 1);
+    }
+  }
+};
+
+                const app = new Vue(example)
+                app.$mount('#app')
+  </script>
   </body>
 </html>
