@@ -14,7 +14,6 @@ if (isset($_POST['delete'])) {
 if ($delete !== "") {
   $file = $path_file.DIRECTORY_SEPARATOR.$delete;
   if (!is_dir($file)) {
-    fclose($file);
     unlink($file);
   } else {
     rrmdir($file);
