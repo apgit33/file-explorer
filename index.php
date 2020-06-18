@@ -1,23 +1,8 @@
 <?php
-session_start();
 require_once "function.php";
 require_once "init.php";
 date_default_timezone_set('Europe/Paris');
 $name = (isset($_POST['name']) ? $_POST['name']:"");
-// **********
-// à retirer pour du js
-// **********
-if (!isset($_POST["cache"])) {
-  $_SESSION['cache'] = 'Show';
-}
-else {
-  if ($_POST["cache"]=='Show') {
-    $_SESSION['cache'] ='Hide';
-  } else {
-    $_SESSION['cache'] ='Show';
-  }
-}
-// **********
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -94,9 +79,7 @@ else {
     <div class="container">
       <?php
       echo "
-        <form action='' method='post' id='create_dir'>
-          <button type='submit' name='cache' class='button' value='".$_SESSION['cache']."' id ='cache' >".$_SESSION['cache']."</button>
-         </form>
+          <button type='submit' name='cache' class='button'  id ='cache' >Show</button>
       <table class=\"table\">
         <thead>
           <tr>
@@ -113,16 +96,21 @@ else {
       <?php
         $items = scandir(getcwd());
         foreach($items as $item) {
-          if (($item !== "." && $item !== "..") && (!(($item[0] == ".") && ($_SESSION['cache'] == 'Show')))) {
+          if ($item !== "." && $item !== "..") {
             $type = (is_dir($item))? "dossier":"fichier";
             $taille = (is_dir($item)) ? taille_dossier($item):filesize($item);
             echo"
-            <tr>
-              <th>";
+            <tr ";
+            if ($item[0] == "."){ 
+              echo "class='hidden'>";
+            } else {
+              echo ">";
+            }
+            echo "<th>";
               if (is_dir($item)) {
                 echo "<a href='?dir=$cwd$item".DIRECTORY_SEPARATOR."' title='$cwd$item'>$item</a>";
               } else {
-                echo "<a href='?dir=$cwd&file=$item' class='fichier' title='$cwd$item' target='blank' >$item</a>";
+                echo "<a href='?dir=$cwd&file=$item' class='fichier' title='$cwd$item'>$item</a>";
               }
             echo"</th>
               <th>$taille</th>
