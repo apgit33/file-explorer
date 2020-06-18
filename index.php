@@ -72,17 +72,19 @@ else {
               <form action="" method="post" id="create_dir">
                 <div class="group">
                   <label class="label" for="name">Nom :</label>
-                  <input class="input" type="text" name="name" id="name" placeholder="Ajoutez l'extension pour créer un fichier">
-                  <input  class="button is-static" type="submit" name="create" value="Create">
+                  <input class="input l-m" type="text" name="name" id="name" placeholder="Ajoutez l'extension pour créer un fichier">
+                  
+                  <input  class="button" type="submit" name="create" value="Create">
                 </div>
-                  </form> 
-                </div>     
-                  <ul id='erreur_creation'>
+                <ul id='erreur_creation'>
                   <li>
                   <?php 
                   (isset($_POST['create']))? create($name):"";
                   ?>
-                  </li></ul>
+                  </li>
+                </ul>
+                  </form> 
+                </div>     
             </div>
           </div>
         </nav>
@@ -91,8 +93,6 @@ else {
   <section class="section">
     <div class="container">
       <?php
-
-      // 
       echo "
         <form action='' method='post' id='create_dir'>
           <button type='submit' name='cache' class='button' value='".$_SESSION['cache']."' id ='cache' >".$_SESSION['cache']."</button>
@@ -177,29 +177,8 @@ else {
       </div>
     </footer>
   </div>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="https://unpkg.com/vue"></script>
-  <script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
-  <script>
-    const example = {
-  data() {
-    return {
-      file: {},
-      dropFiles: []
-    };
-  },
-  methods: {
-    deleteDropFile(index) {
-      this.dropFiles.splice(index, 1);
-    }
-  }
-};
-
-                const app = new Vue(example)
-                app.$mount('#app')
-  </script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="custom.js"></script>    
     <script src="script.js"></script>
   </body>
 </html>
