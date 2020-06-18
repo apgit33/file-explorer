@@ -12,4 +12,4 @@ if (!file_exists('home')) {
  
 move_uploaded_file($_FILES['file']['tmp_name'], 'home/' . time() . '_' . $_FILES['file']['name']);
  
-echo "Fichier ajouté!";
+echo "GREAT SUCCESS!";
