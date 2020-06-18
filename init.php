@@ -1,8 +1,8 @@
 <?php
 
 // create the main directory one level forward from the main script
-$home_dir = 'home';
-if (!is_dir($home_dir)){ mkdir("home");}
+$home_dir = 'accueil';
+if (!is_dir($home_dir)){ mkdir("accueil");}
 //
 chdir(getcwd() . DIRECTORY_SEPARATOR . $home_dir);
 //
