@@ -122,7 +122,7 @@ else {
               if (is_dir($item)) {
                 echo "<a href='?dir=$cwd$item".DIRECTORY_SEPARATOR."' title='$cwd$item'>$item</a>";
               } else {
-                echo "<a href='?dir=$cwd&file=$item' class='fichier' title='$cwd$item' target='blank' >$item</a>";
+                echo "<a href='?dir=$cwd&file=$item' class='fichier' title='$cwd$item'>$item</a>";
               }
             echo"</th>
               <th>$taille</th>
