@@ -47,6 +47,7 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
                         echo "<li><a href=\"?dir=$path_accum\" title=\"$path_accum\">$item</a></li>";
                     }
                   }
+
                    ?>
                 </ul>
           </div>
@@ -56,7 +57,7 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
               <form action="" method="post" id="create_dir">
                 <div class="group">
                   <label class="label" for="name">Nom :</label>
-                  <input class="input" type="text" name="name" id="name">
+                  <input class="input" type="text" name="name" id="name" placeholder="Ajoutez l'extension pour créer un fichier">
                   <input  class="button is-static" type="submit" name="create" value="Create">
                 </div>
                   </form> 

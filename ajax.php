@@ -10,6 +10,6 @@ if (!file_exists('home')) {
     mkdir('home', 0777);
 }
  
-move_uploaded_file($_FILES['file']['tmp_name'], 'home/' . time() . '_' . $_FILES['file']['name']);
+move_uploaded_file($_FILES['file']['tmp_name'], 'acceuil/' . time() . '_' . $_FILES['file']['name']);
  
 echo "GREAT SUCCESS!";
