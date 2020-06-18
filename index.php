@@ -1,11 +1,26 @@
 <?php
+session_start();
 require_once "function.php";
 require_once "init.php";
 date_default_timezone_set('Europe/Paris');
 $name = (isset($_POST['name']) ? $_POST['name']:"");
+// **********
+// à retirer pour du js
+// **********
+if (!isset($_POST["cache"])) {
+  $_SESSION['cache'] = 'Show';
+}
+else {
+  if ($_POST["cache"]=='Show') {
+    $_SESSION['cache'] ='Hide';
+  } else {
+    $_SESSION['cache'] ='Show';
+  }
+}
+// **********
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,14 +32,14 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
   <body>
   <?php
 
-        if (!empty($_GET['dir'])) {
-        $cwd = $_GET['dir'];
-        }
-        else  {
-          $cwd = $init_dir.DIRECTORY_SEPARATOR;
-        }
+    if (!empty($_GET['dir'])) {
+    $cwd = $_GET['dir'];
+    }
+    else  {
+      $cwd = $init_dir.DIRECTORY_SEPARATOR;
+    }
 
-        chdir($cwd);
+    chdir($cwd);
 
     ?>
       <header>
@@ -73,7 +88,13 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
   <section class="section">
     <div class="container">
       <?php
-      echo "<table class=\"table\">
+
+      // 
+      echo "
+        <form action='' method='post' id='create_dir'>
+          <button type='submit' name='cache' class='button' value='".$_SESSION['cache']."' id ='cache' >".$_SESSION['cache']."</button>
+         </form>
+      <table class=\"table\">
         <thead>
           <tr>
             <th>Nom</th>
@@ -89,7 +110,7 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
       <?php
         $items = scandir(getcwd());
         foreach($items as $item) {
-          if($item !== "." && $item !== "..") {
+          if (($item !== "." && $item !== "..") && (!(($item[0] == ".") && ($_SESSION['cache'] == 'Show')))) {
             $type = (is_dir($item))? "dossier":"fichier";
             $taille = (is_dir($item)) ? taille_dossier($item):filesize($item);
             echo"
@@ -156,8 +177,29 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
       </div>
     </footer>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="custom.js"></script>
-    <!-- <script src="script.js"></script> -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
+  <script>
+    const example = {
+  data() {
+    return {
+      file: {},
+      dropFiles: []
+    };
+  },
+  methods: {
+    deleteDropFile(index) {
+      this.dropFiles.splice(index, 1);
+    }
+  }
+};
+
+                const app = new Vue(example)
+                app.$mount('#app')
+  </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>    
+    <script src="script.js"></script>
   </body>
 </html>
