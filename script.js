@@ -1,8 +1,12 @@
-let cacheMOi = 'cache';
-let tr = $('tr');
-let th = $('#item');
+let hideSeek = 'cache';
+let tr = $('.hidden');
+tr.hide()
 $("#cache").click(function(){
-    // tr.hide();
-    console.log(tr[1])
-
+    if (hideSeek == 'cache') {
+        tr.show();
+        hideSeek = 'show'
+    } else {
+        tr.hide();
+        hideSeek ='cache'
+    }
 });
