@@ -16,3 +16,38 @@
 #drag_upload_file #selectfile {
   display: none;
 }
+
+.group {
+    display:flex;
+     flex-direction: row;
+      justify-content: center;
+       align-items: center;
+}
+
+.group > label {
+    width: 5rem;
+    display: flex;
+    margin-right: 1rem;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+}
+
+.is-static {
+    margin-left: 0.5rem;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    padding-top: 1rem;
+}
+
+.footer {
+    margin-top: 4rem;
+    padding-top: 3rem;
+}
+
+.text {
+    margin-top: 2.5rem;
+}

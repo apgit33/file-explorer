@@ -30,7 +30,7 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
       <header>
       <div class="container">
         <nav class="navbar">
-          <div class="breadcrumb has-succeeds-separator" aria-label="breadcrumbs">
+          <div class="navbar-brand breadcrumb has-succeeds-separator" aria-label="breadcrumbs">
                 <ul>
                 <?php
                    // break absolute path into individual items
@@ -54,17 +54,19 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
             <div class="navbar-end">
               <div class="navbar-item">
               <form action="" method="post" id="create_dir">
-                  <label for="name">Nom :</label>
-                  <input type="text" name="name" id="name">
-                  <input type="submit" name="create" value="create">
-                </form>   
-              </div>     
-                <ul id='erreur_creation'>
-                <li>
-                <?php 
-                (isset($_POST['create']))? create($name):"";
-                ?>
-              </li></ul>
+                <div class="group">
+                  <label class="label" for="name">Nom :</label>
+                  <input class="input" type="text" name="name" id="name">
+                  <input  class="button is-static" type="submit" name="create" value="Create">
+                </div>
+                  </form> 
+                </div>     
+                  <ul id='erreur_creation'>
+                  <li>
+                  <?php 
+                  (isset($_POST['create']))? create($name):"";
+                  ?>
+                  </li></ul>
             </div>
           </div>
         </nav>
@@ -147,15 +149,11 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
     </div>
  </section>
  </div>
-
-  
-  <div class="container">
     <footer class="footer">
       <div class="content has-text-centered">
         <p class="text">File Explorer - Adrien Paturot & Guillaume Blondel</p>
       </div>
     </footer>
-  </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="custom.js"></script>
     <!-- <script src="script.js"></script> -->
