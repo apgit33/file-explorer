@@ -3,6 +3,17 @@ require_once "function.php";
 require_once "init.php";
 date_default_timezone_set('Europe/Paris');
 $name = (isset($_POST['name']) ? $_POST['name']:"");
+
+if (!isset($_POST["cache"])) {
+  $hide_and_seek = 'Show';
+}
+else {
+  if ($_POST["cache"]=='Show') {
+    $hide_and_seek ='Hide';
+  } else {
+    $hide_and_seek ='Show';
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,14 +30,14 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
   <?php
 
-        if (!empty($_GET['dir'])) {
-        $cwd = $_GET['dir'];
-        }
-        else  {
-          $cwd = $init_dir.DIRECTORY_SEPARATOR;
-        }
+    if (!empty($_GET['dir'])) {
+    $cwd = $_GET['dir'];
+    }
+    else  {
+      $cwd = $init_dir.DIRECTORY_SEPARATOR;
+    }
 
-        chdir($cwd);
+    chdir($cwd);
 
     ?>
       <header>
@@ -76,13 +87,11 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
     <div class="container">
       <?php
 
-      // <form action='' method='post' id='create_dir'></form> 
+      // 
       echo "
-
-        
-          <button type='submit' name='cache' class='button' value='he' id ='cache' >hide&seek</button>
-        
-
+        <form action='' method='post' id='create_dir'>
+          <button type='submit' name='cache' class='button' value='$hide_and_seek' id ='cache' >$hide_and_seek</button>
+         </form>
       <table class=\"table\">
         <thead>
           <tr>
@@ -99,11 +108,11 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
       <?php
         $items = scandir(getcwd());
         foreach($items as $item) {
-          if($item !== "." && $item !== "..") {
+          if (($item !== "." && $item !== "..") && (!(($item[0] == ".") && ($hide_and_seek == 'Show')))) {
             $type = (is_dir($item))? "dossier":"fichier";
             $taille = (is_dir($item)) ? taille_dossier($item):filesize($item);
             echo"
-            <tr value=$item>
+            <tr>
               <th>";
               if (is_dir($item)) {
                 echo "<a href='?dir=$cwd$item".DIRECTORY_SEPARATOR."' title='$cwd$item'>$item</a>";
@@ -176,7 +185,6 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
     </div>
   </section>
   </div>
-  
   <div class="container">
     <footer class="footer">
       <div class="content has-text-centered">
@@ -205,8 +213,5 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
                 const app = new Vue(example)
                 app.$mount('#app')
   </script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>    
-    <script src="script.js"></script>
   </body>
 </html>
