@@ -1,19 +1,23 @@
 <?php
+session_start();
 require_once "function.php";
 require_once "init.php";
 date_default_timezone_set('Europe/Paris');
 $name = (isset($_POST['name']) ? $_POST['name']:"");
-
+// **********
+// à retirer pour du js
+// **********
 if (!isset($_POST["cache"])) {
-  $hide_and_seek = 'Show';
+  $_SESSION['cache'] = 'Show';
 }
 else {
   if ($_POST["cache"]=='Show') {
-    $hide_and_seek ='Hide';
+    $_SESSION['cache'] ='Hide';
   } else {
-    $hide_and_seek ='Show';
+    $_SESSION['cache'] ='Show';
   }
 }
+// **********
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -90,7 +94,7 @@ else {
       // 
       echo "
         <form action='' method='post' id='create_dir'>
-          <button type='submit' name='cache' class='button' value='$hide_and_seek' id ='cache' >$hide_and_seek</button>
+          <button type='submit' name='cache' class='button' value='".$_SESSION['cache']."' id ='cache' >".$_SESSION['cache']."</button>
          </form>
       <table class=\"table\">
         <thead>
@@ -108,7 +112,7 @@ else {
       <?php
         $items = scandir(getcwd());
         foreach($items as $item) {
-          if (($item !== "." && $item !== "..") && (!(($item[0] == ".") && ($hide_and_seek == 'Show')))) {
+          if (($item !== "." && $item !== "..") && (!(($item[0] == ".") && ($_SESSION['cache'] == 'Show')))) {
             $type = (is_dir($item))? "dossier":"fichier";
             $taille = (is_dir($item)) ? taille_dossier($item):filesize($item);
             echo"
@@ -185,6 +189,7 @@ else {
     </div>
   </section>
   </div>
+  
   <div class="container">
     <footer class="footer">
       <div class="content has-text-centered">
@@ -213,5 +218,8 @@ else {
                 const app = new Vue(example)
                 app.$mount('#app')
   </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>    
+    <script src="script.js"></script>
   </body>
 </html>
