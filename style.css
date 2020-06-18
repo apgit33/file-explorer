@@ -51,3 +51,7 @@
 .text {
     margin-top: 2.5rem;
 }
+
+.subhead::first-letter {
+    text-transform: capitalize;
+  }

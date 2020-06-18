@@ -9,7 +9,7 @@ chdir(getcwd() . DIRECTORY_SEPARATOR . $home_dir);
 $init_dir = getcwd();
 
 // create recycle bin directory
-$recycle_bin__dir = 'recycle_bin';
-if (!is_dir($recycle_bin__dir)) {mkdir("recycle_bin");}
+$recycle_bin__dir = '.recycle_bin';
+if (!is_dir($recycle_bin__dir)) {mkdir(".recycle_bin");}
 
 ?>
