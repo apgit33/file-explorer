@@ -1,12 +1,14 @@
 let hideSeek = 'cache';
-let tr = $('.hidden');
-tr.hide()
+let cacheMoi = $('.hidden');
+cacheMoi.hide()
 $("#cache").click(function(){
     if (hideSeek == 'cache') {
-        tr.show();
+        cacheMoi.show();
         hideSeek = 'show'
+        $(this).html("Hide");
     } else {
-        tr.hide();
+        cacheMoi.hide();
         hideSeek ='cache'
+        $(this).html("Show");
     }
 });
