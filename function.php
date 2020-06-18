@@ -39,3 +39,17 @@ function afficher_content($name) {
         echo "# {$line_num} : ".htmlspecialchars($line)."<br />\n"; 
     }
 }
+function rrmdir($dir) {
+    $objects = scandir($dir); // on scan le dossier pour récupérer ses objets
+    foreach ($objects as $object) { // pour chaque objet
+        if ($object != "." && $object != "..") { // si l'objet n'est pas . ou ..
+            if (filetype($dir.DIRECTORY_SEPARATOR.$object) == "dir") {
+                rmdir($dir.DIRECTORY_SEPARATOR.$object);
+            } else {
+                unlink($dir.DIRECTORY_SEPARATOR.$object); // on supprime l'objet
+            }
+        }
+    }
+    reset($objects); // on remet à 0 les objets
+    rmdir($dir); // on supprime le dossier
+}

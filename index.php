@@ -3,6 +3,23 @@ require_once "function.php";
 require_once "init.php";
 date_default_timezone_set('Europe/Paris');
 $name = (isset($_POST['name']) ? $_POST['name']:"");
+$path_file = (isset($_POST['path']) ? $_POST['path']:"");
+$delete = (isset($_POST['deleteReally']) ? $_POST['deleteReally']:"");
+
+if (isset($_POST['delete'])) {
+  $deleteMove = $_POST['delete'];
+  rename($deleteMove,getcwd().DIRECTORY_SEPARATOR.'.recycle_bin'.DIRECTORY_SEPARATOR.$deleteMove);
+}
+
+if ($delete !== "") {
+  $file = $path_file.DIRECTORY_SEPARATOR.$delete;
+  if (!is_dir($file)) {
+    fclose($file);
+    unlink($file);
+  } else {
+    rrmdir($file);
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,6 +112,8 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
 
       <?php
         $items = scandir(getcwd());
+         
+        $path=getcwd();
         foreach($items as $item) {
           if ($item !== "." && $item !== "..") {
             $type = (is_dir($item))? "dossier":"fichier";
@@ -116,9 +135,24 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
               <th>$taille</th>
               <th>$type</th>
               <th>".date ("d/m/Y H:i:s", filemtime($item))."</th>
-              <th>
+              <th>";
+              if ($item !== '.recycle_bin') {
+                echo "<div class='group'>
                 <button class=\"button\">Modifier</button>
-                <button class=\"button\">Supprimer</button>
+                
+                <form action='' method='post' id='delete_form'>
+                  <input type='hidden' value=$path name='path'/>";
+                if (!strstr(getcwd(),DIRECTORY_SEPARATOR.'.recycle_bin')){
+                  echo "<button type ='submit' class='button' name='delete' value='$item'>Supprimer</button>";
+                } else {
+                  echo "
+                  <button type ='submit' class='button' name='deleteReally' value='$item' style='background-color: red;'>Supprimer</button>";
+                }
+                echo "
+                </form>
+                </div>";
+              }
+              echo "
               </th>
             </tr>
             ";
@@ -138,7 +172,6 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
               case '.jpg':
                 print_r ("<img src='".substr(strrchr(getcwd(),DIRECTORY_SEPARATOR),1).DIRECTORY_SEPARATOR.$_GET['file']."' alt=''/>");
                 break;
-              
               default:
                 break;
             }
