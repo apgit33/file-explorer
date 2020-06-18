@@ -12,11 +12,9 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
     <title>File Explorer</title>
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.3.45/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/buefy/dist/buefy.min.css">
+    <link rel="stylesheet" href="style.css">
   </head>
- 
   <body>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
   <?php
 
         if (!empty($_GET['dir'])) {
@@ -107,8 +105,8 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
               <th>$type</th>
               <th>".date ("d/m/Y H:i:s", filemtime($item))."</th>
               <th>
-                <button>Modifier</button>
-                <button>Supprimer</button>
+                <button class=\"button\">Modifier</button>
+                <button class=\"button\">Supprimer</button>
               </th>
             </tr>
             ";
@@ -137,37 +135,19 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
       </div>
     </div>
   </section>
-  <div id="app" class="container">
+  <div class="container">
   <section>
-    <b-field class="file">
-      <b-upload v-model="file" expanded>
-        <a class="button is-primary is-fullwidth">
-          <b-icon icon="upload"></b-icon>
-          <span>{{ file.name || "Click to upload"}}</span>
-        </a>
-      </b-upload>
-    </b-field>
-    <b-field>
-      <b-upload v-model="dropFiles" multiple drag-drop expanded>
-        <section class="section">
-          <div class="content has-text-centered">
-            <p>
-              <b-icon icon="upload" size="is-large"></b-icon>
-            </p>
-            <p>Drop your files here or click to upload</p>
-          </div>
-        </section>
-      </b-upload>
-    </b-field>
-
-    <div class="tags">
-      <span v-for="(file, index) in dropFiles" :key="index" class="tag is-primary">
-        {{file.name}}
-        <button class="delete is-small" type="button" @click="deleteDropFile(index)"></button>
-      </span>
+    <div id="drop_file_zone" ondrop="upload_file(event)" ondragover="return false">
+      <div id="drag_upload_file">
+          <p>Ajoutez le fichier ici</p>
+          <p>ou</p>
+          <p><input class="button" type="button" value="Select File" onclick="file_explorer();"></p>
+          <input class="button" type="file" id="selectfile">
+      </div>
     </div>
-  </section>
-  </div>
+ </section>
+ </div>
+
   
   <div class="container">
     <footer class="footer">
@@ -176,27 +156,8 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
       </div>
     </footer>
   </div>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="https://unpkg.com/vue"></script>
-  <script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
-  <script>
-    const example = {
-  data() {
-    return {
-      file: {},
-      dropFiles: []
-    };
-  },
-  methods: {
-    deleteDropFile(index) {
-      this.dropFiles.splice(index, 1);
-    }
-  }
-};
-
-                const app = new Vue(example)
-                app.$mount('#app')
-  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="custom.js"></script>
     <!-- <script src="script.js"></script> -->
   </body>
 </html>
