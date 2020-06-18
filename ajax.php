@@ -6,10 +6,10 @@ if (!(in_array($_FILES['file']['type'], $arr_file_types))) {
     return;
 }
  
-if (!file_exists('home')) {
-    mkdir('home', 0777);
+if (!file_exists('accueil')) {
+    mkdir('accueil', 0777);
 }
  
-move_uploaded_file($_FILES['file']['tmp_name'], 'acceuil/' . time() . '_' . $_FILES['file']['name']);
+move_uploaded_file($_FILES['file']['tmp_name'], 'accueil/' . time() . '_' . $_FILES['file']['name']);
  
 echo "GREAT SUCCESS!";
