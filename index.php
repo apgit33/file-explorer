@@ -5,7 +5,7 @@ date_default_timezone_set('Europe/Paris');
 $name = (isset($_POST['name']) ? $_POST['name']:"");
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -75,7 +75,15 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
   <section class="section">
     <div class="container">
       <?php
-      echo "<table class=\"table\">
+
+      // <form action='' method='post' id='create_dir'></form> 
+      echo "
+
+        
+          <button type='submit' name='cache' class='button' value='he' id ='cache' >hide&seek</button>
+        
+
+      <table class=\"table\">
         <thead>
           <tr>
             <th>Nom</th>
@@ -95,7 +103,7 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
             $type = (is_dir($item))? "dossier":"fichier";
             $taille = (is_dir($item)) ? taille_dossier($item):filesize($item);
             echo"
-            <tr>
+            <tr id=$item >
               <th>";
               if (is_dir($item)) {
                 echo "<a href='?dir=$cwd$item".DIRECTORY_SEPARATOR."' title='$cwd$item'>$item</a>";
@@ -107,8 +115,8 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
               <th>$type</th>
               <th>".date ("d/m/Y H:i:s", filemtime($item))."</th>
               <th>
-                <button>Modifier</button>
-                <button>Supprimer</button>
+                <button class=\"button\">Modifier</button>
+                <button class=\"button\">Supprimer</button>
               </th>
             </tr>
             ";
@@ -197,6 +205,8 @@ $name = (isset($_POST['name']) ? $_POST['name']:"");
                 const app = new Vue(example)
                 app.$mount('#app')
   </script>
-    <!-- <script src="script.js"></script> -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>    
+    <script src="script.js"></script>
   </body>
 </html>
