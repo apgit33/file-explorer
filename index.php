@@ -162,13 +162,11 @@ if ($delete !== "") {
       </table>
       <div>
         <?php         
-          if (!empty($_GET['file'])) {
-            $extension=strrchr($_GET['file'],'.');
+          if ((!empty($_GET['file'])) && (file_exists($_GET['file']))) {
+            $extension = strrchr($_GET['file'],'.');
             switch ($extension) {
               case '.txt':
-                if (file_exists($_GET['file'])) {
                   afficher_content($_GET['file']);
-                }
                 break;
               case '.jpg':
                 print_r ("<img src='".substr(strrchr(getcwd(),DIRECTORY_SEPARATOR),1).DIRECTORY_SEPARATOR.$_GET['file']."' alt=''/>");
