@@ -8,7 +8,7 @@ $delete = (isset($_POST['deleteReally']) ? $_POST['deleteReally']:"");
 
 if (isset($_POST['delete'])) {
   $deleteMove = $_POST['delete'];
-  rename($deleteMove,getcwd().DIRECTORY_SEPARATOR.'.recycle_bin'.DIRECTORY_SEPARATOR.$deleteMove);
+  rename($path_file.DIRECTORY_SEPARATOR.$deleteMove,getcwd().DIRECTORY_SEPARATOR.'.recycle_bin'.DIRECTORY_SEPARATOR.$deleteMove);
 }
 
 if ($delete !== "") {
