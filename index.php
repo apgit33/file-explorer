@@ -137,14 +137,14 @@ if ($delete !== "") {
               <th>";
               if ($item !== '.recycle_bin') {
                 echo "<div class='group'>
-                <button class=\"button\">Modifier</button>
-                
                 <form action='' method='post' id='delete_form'>
+                <button class=\"button\">Modifier</button>
                   <input type='hidden' value=$path name='path'/>";
                 if (!strstr(getcwd(),DIRECTORY_SEPARATOR.'.recycle_bin')){
                   echo "<button type ='submit' class='button' name='delete' value='$item'>Supprimer</button>";
                 } else {
                   echo "
+                  <button type ='submit' class='button' name='restore' value='$item' style='background-color: green;'>Restaurer</button>
                   <button type ='submit' class='button' name='deleteReally' value='$item' style='background-color: red;'>Supprimer</button>";
                 }
                 echo "
