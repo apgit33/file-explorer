@@ -144,8 +144,8 @@ if ($delete !== "") {
                   echo "<button type ='submit' class='button' name='delete' value='$item'>Supprimer</button>";
                 } else {
                   echo "
-                  <button type ='submit' class='button' name='restore' value='$item' style='background-color: green;'>Restaurer</button>
-                  <button type ='submit' class='button' name='deleteReally' value='$item' style='background-color: red;'>Supprimer</button>";
+                  <button type ='submit' class='button' name='restore' value='$item' id='restore'>Restaurer</button>
+                  <button type ='submit' class='button' name='deleteReally' value='$item' id='delete'>Supprimer</button>";
                 }
                 echo "
                 </form>

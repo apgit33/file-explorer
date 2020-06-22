@@ -55,3 +55,10 @@
 .subhead::first-letter {
     text-transform: capitalize;
   }
+
+#restore {
+  background-color: mediumseagreen;
+}
+#delete {
+  background-color: tomato;
+}
